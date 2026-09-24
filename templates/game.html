@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Guess The Word</title>
+    {% load static %}
+
+<link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+    <h1>Guess The Word</h1>
+
+    <p>Welcome, {{ request.user.username }}!</p>
+
+    <p>Your game has started.</p>
+
+    {% if not game.completed %}
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <input type="text" name="guess" maxlength="5">
+
+        <button type="submit">Guess</button>
+    </form>
+
+{% else %}
+
+    {% if game.won %}
+        <h2>🎉 Congratulations! You guessed the word!</h2>
+    {% else %}
+        <h2>Better luck next time!</h2>
+        <p>The word was: {{ game.word.word }}</p>
+    {% endif %}
+
+{% endif %}
+    {% if result %}
+    <div>
+        {% for color in result %}
+            <span class="{{ color }}">  
+            </span>
+        {% endfor %}
+    </div>
+{% endif %}
+<a href="/logout/">Logout</a>
+
+</body>
+</html>

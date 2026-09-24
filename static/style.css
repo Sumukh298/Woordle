@@ -1,0 +1,23 @@
+.green {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-color: green;
+    margin: 3px;
+}
+
+.orange {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-color: orange;
+    margin: 3px;
+}
+
+.grey {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-color: grey;
+    margin: 3px;
+}

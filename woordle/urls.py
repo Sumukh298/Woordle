@@ -17,9 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from guessgame.views import register, user_login
+from guessgame.views import register, user_login, game ,user_logout
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', register, name='register'),
-    path('login/', user_login, name='login'),
+    path('login/', user_login, name='login'),   
+    path('game/', game, name='game'),
+    path('logout/', user_logout, name='logout'),
 ]
