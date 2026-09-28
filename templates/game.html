@@ -1,48 +1,111 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Guess The Word</title>
+
     {% load static %}
 
-<link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
+
 <body>
 
     <h1>Guess The Word</h1>
 
     <p>Welcome, {{ request.user.username }}!</p>
 
-    <p>Your game has started.</p>
 
-    {% if not game.completed %}
+    {% if limit_reached %}
 
-    <form method="POST">
-        {% csrf_token %}
+        <h2>You have reached your limit of 3 games for today.</h2>
 
-        <input type="text" name="guess" maxlength="5">
 
-        <button type="submit">Guess</button>
-    </form>
-
-{% else %}
-
-    {% if game.won %}
-        <h2>🎉 Congratulations! You guessed the word!</h2>
     {% else %}
-        <h2>Better luck next time!</h2>
-        <p>The word was: {{ game.word.word }}</p>
-    {% endif %}
 
-{% endif %}
-    {% if result %}
-    <div>
-        {% for color in result %}
-            <span class="{{ color }}">  
-            </span>
+        <p>Your game has started.</p>
+
+
+        {% if not game.completed %}
+
+            {% if error %}
+                <p>{{ error }}</p>
+            {% endif %}
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <input
+                    type="text"
+                    name="guess"
+                    maxlength="5"
+                >
+
+                <button type="submit">Guess</button>
+
+            </form>
+
+
+        {% else %}
+
+            {% if game.won %}
+
+                <h2>🎉 Congratulations! You guessed the word!</h2>
+
+            {% else %}
+
+                <h2>Better luck next time!</h2>
+
+                <p>
+                    The word was: {{ game.word.word }}
+                </p>
+
+            {% endif %}
+
+
+            <!-- Next Game button -->
+            <form action="{% url 'next_game' %}" method="POST">
+
+                {% csrf_token %}
+
+                <button type="submit">Next Game</button>
+
+            </form>
+
+        {% endif %}
+
+
+        <!-- Previous guesses -->
+
+        {% for guess in guesses %}
+
+            <div>
+
+                {% for tile in guess.tiles %}
+
+                    <span class="{{ tile.color }}">
+                        {{ tile.letter }}
+                    </span>
+
+                {% endfor %}
+
+            </div>
+
         {% endfor %}
-    </div>
-{% endif %}
-<a href="/logout/">Logout</a>
+    {% endif %}
+<form action="{% url 'reset_game' %}" method="POST">
+
+            {% csrf_token %}
+
+            <button type="submit">Reset Game</button>
+
+        </form>
+
+    <p>
+        <a href="/logout/">Logout</a>
+    </p>
 
 </body>
+
 </html>

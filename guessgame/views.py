@@ -5,10 +5,48 @@ from .forms import RegisterForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import Word, Game, Guess
+from django.utils import timezone
+def check_guess(guess, target):
+    result = ['grey'] * 5
+
+    letter_count = {}
+
+    for letter in target:
+        if letter in letter_count:
+            letter_count[letter] += 1
+        else:
+            letter_count[letter] = 1
+
+    # Pass 1: exact matches
+    for i in range(5):
+        if guess[i] == target[i]:
+            result[i] = 'green'
+            letter_count[guess[i]] -= 1
+
+    # Pass 2: misplaced letters
+    for i in range(5):
+        if result[i] == 'grey' and guess[i] in letter_count and letter_count[guess[i]] > 0:
+            result[i] = 'orange'
+            letter_count[guess[i]] -= 1
+
+    return result
+
+    
 @login_required
 def game(request):
 
     if 'game_id' not in request.session:
+
+        games_today = Game.objects.filter(
+            user=request.user,
+            date=timezone.localdate()
+        ).count()
+
+        if games_today >= 3:
+            return render(request, 'game.html', {
+                'limit_reached': True
+            })
+
         word = Word.objects.order_by('?').first()
 
         game = Game.objects.create(
@@ -28,6 +66,18 @@ def game(request):
     if request.method == 'POST':
         guess = request.POST['guess'].upper()
 
+        if len(guess) != 5:
+            guesses = Guess.objects.filter(
+                game=game
+            ).order_by('guess_number')
+
+            return render(request, 'game.html', {
+                'game': game,
+                'result': result,
+                'guesses': guesses,
+                'error': 'Guess must be exactly 5 letters.'
+            })
+
         guess_count = Guess.objects.filter(game=game).count()
 
         if guess_count < 5 and not game.completed:
@@ -39,16 +89,7 @@ def game(request):
             )
 
             target = game.word.word
-
-            for i in range(5):
-                if guess[i] == target[i]:
-                    result.append('green')
-                elif guess[i] in target:
-                    result.append('orange')
-                else:
-                    result.append('grey')
-
-            print(result)
+            result = check_guess(guess, target)
 
             if guess == target:
                 game.won = True
@@ -59,9 +100,33 @@ def game(request):
                 game.completed = True
                 game.save()
 
+    guesses = Guess.objects.filter(
+        game=game
+    ).order_by('guess_number')
+    guess_results = []
+
+    for previous_guess in guesses:
+        colors = check_guess(
+            previous_guess.guess,
+            game.word.word
+        )
+
+        tiles = []
+
+        for i in range(5):
+            tiles.append({
+                'letter': previous_guess.guess[i],
+                'color': colors[i]
+            })
+
+        guess_results.append({
+            'tiles': tiles
+        })
+
     return render(request, 'game.html', {
         'game': game,
-        'result': result
+        'result': result,
+        'guesses': guess_results
     })
 
 def register(request):
@@ -101,3 +166,21 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('login')
+#remove this after finsihing
+@login_required
+def reset_game(request):
+    Game.objects.filter(
+        user=request.user,
+        date=timezone.localdate()
+    ).delete()
+
+    if 'game_id' in request.session:
+        del request.session['game_id']
+
+    return redirect('game')
+@login_required
+def next_game(request):
+    if 'game_id' in request.session:
+        del request.session['game_id']
+
+    return redirect('game')
