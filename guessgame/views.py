@@ -6,6 +6,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import Word, Game, Guess
 from django.utils import timezone
+from django.contrib.auth.models import User
+from django.db.models import Count, Q
 def check_guess(guess, target):
     result = ['grey'] * 5
 
@@ -76,6 +78,17 @@ def game(request):
                 'result': result,
                 'guesses': guesses,
                 'error': 'Guess must be exactly 5 letters.'
+            })
+        if not guess.isascii() or not guess.isalpha():
+            guesses = Guess.objects.filter(
+                game=game
+            ).order_by('guess_number')
+
+            return render(request, 'game.html', {
+                'game': game,
+                'result': result,
+                'guesses': guesses,
+                'error': 'Guess must contain only letters.'
             })
 
         guess_count = Guess.objects.filter(game=game).count()
@@ -166,21 +179,72 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('login')
-#remove this after finsihing
-@login_required
-def reset_game(request):
-    Game.objects.filter(
-        user=request.user,
-        date=timezone.localdate()
-    ).delete()
-
-    if 'game_id' in request.session:
-        del request.session['game_id']
-
-    return redirect('game')
 @login_required
 def next_game(request):
     if 'game_id' in request.session:
         del request.session['game_id']
 
     return redirect('game')
+@login_required
+def reports(request):
+
+    if not request.user.is_staff:
+        return redirect('game')
+
+    report_date = None
+    users_played = 0
+    correct_guesses = 0
+
+    selected_user = None
+    user_report = []
+
+    if request.method == 'POST':
+
+        if 'report_date' in request.POST:
+
+            report_date = request.POST.get('report_date')
+
+            games = Game.objects.filter(
+                date=report_date
+            )
+
+            users_played = games.values(
+                'user'
+            ).distinct().count()
+
+            correct_guesses = games.filter(
+                won=True
+            ).count()
+
+
+        elif 'user_report' in request.POST:
+
+            user_id = request.POST.get('report_user')
+
+            selected_user = User.objects.get(
+                id=user_id
+            )
+
+            games = Game.objects.filter(
+                user=selected_user
+            ).values('date').annotate(
+                words_tried=Count('id'),
+                correct_guesses=Count(
+                'id',
+                filter=Q(won=True)
+                )
+            ).order_by('date')
+
+            user_report = games
+
+    return render(request, 'reports.html', {
+        'report_date': report_date,
+        'users_played': users_played,
+        'correct_guesses': correct_guesses,
+        'users': User.objects.all(),
+        'selected_user': selected_user,
+        'user_report': user_report
+    })
+@login_required
+def game_over(request):
+    return render(request, 'game_over.html')

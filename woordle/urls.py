@@ -17,13 +17,33 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from guessgame.views import register, user_login, game ,user_logout,reset_game,next_game
+from guessgame.views import (
+    register,
+    user_login,
+    game,
+    user_logout,
+    next_game,
+    reports,
+    game_over
+)
+
 urlpatterns = [
+
+    path('', user_login, name='home'),
+
     path('admin/', admin.site.urls),
+
     path('register/', register, name='register'),
-    path('login/', user_login, name='login'),   
+
+    path('login/', user_login, name='login'),
+
     path('game/', game, name='game'),
+
     path('logout/', user_logout, name='logout'),
-    path('reset_game/', reset_game, name='reset_game'),
+
     path('next_game/', next_game, name='next_game'),
+
+    path('reports/', reports, name='reports'),
+
+    path('game_over/', game_over, name='game_over'),
 ]

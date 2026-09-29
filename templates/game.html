@@ -37,10 +37,12 @@
                 {% csrf_token %}
 
                 <input
-                    type="text"
-                    name="guess"
-                    maxlength="5"
-                >
+                type="text"
+                name="guess"
+                maxlength="5"
+                pattern="[A-Za-z]{5}"
+                title="Enter exactly 5 letters."
+                required>
 
                 <button type="submit">Guess</button>
 
@@ -62,9 +64,13 @@
                 </p>
 
             {% endif %}
+            <form action="{% url 'game_over' %}" method="POST">
 
+            {% csrf_token %}
 
-            <!-- Next Game button -->
+        <button type="submit">OK</button>
+
+        </form>
             <form action="{% url 'next_game' %}" method="POST">
 
                 {% csrf_token %}
@@ -74,10 +80,6 @@
             </form>
 
         {% endif %}
-
-
-        <!-- Previous guesses -->
-
         {% for guess in guesses %}
 
             <div>
@@ -94,17 +96,15 @@
 
         {% endfor %}
     {% endif %}
-<form action="{% url 'reset_game' %}" method="POST">
-
-            {% csrf_token %}
-
-            <button type="submit">Reset Game</button>
-
-        </form>
 
     <p>
         <a href="/logout/">Logout</a>
     </p>
+    {% if request.user.is_staff %}
+    <p>
+        <a href="{% url 'reports' %}">Admin Reports</a>
+    </p>
+{% endif %}
 
 </body>
 
