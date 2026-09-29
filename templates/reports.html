@@ -1,117 +1,367 @@
+{% load static %}
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Admin Reports</title>
+
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
 </head>
 
-<body>
 
-    <h1>Admin Reports</h1>
+<body class="reports-page">
 
-    <p>Welcome, {{ request.user.username }}!</p>
+    <header class="reports-header">
+
+        <div class="reports-brand">
+
+            <div class="reports-logo">
+                GW
+            </div>
+
+            <div>
+
+                <h1>
+                    Admin Reports
+                </h1>
+
+                <p>
+                    Welcome, {{ request.user.username }}
+                </p>
+
+            </div>
+
+        </div>
 
 
-    <h2>Daily Report</h2>
+        <div class="reports-actions">
 
-    <form method="POST">
+            <button
+                type="button"
+                class="download-button"
+                onclick="window.print()"
+            >
+                ↓ Save Report
+            </button>
 
-        {% csrf_token %}
 
-        <label for="report_date">
-            Select Date:
-        </label>
+            <a
+                href="{% url 'game' %}"
+                class="back-game-button"
+            >
+                Back to Game
+            </a>
 
-        <input
-            type="date"
-            id="report_date"
-            name="report_date"
+
+            <a
+                href="/logout/"
+                class="logout-button"
+            >
+                Logout
+            </a>
+
+        </div>
+
+    </header>
+
+    <main class="reports-container">
+
+
+        <div class="reports-intro">
+
+            <span class="eyebrow">
+                ADMIN DASHBOARD
+            </span>
+
+            <h2>
+                Game Analytics
+            </h2>
+
+            <p>
+                Review player activity and game performance.
+            </p>
+
+        </div>
+
+        <section class="report-grid">
+
+
+            <!-- DAILY REPORT -->
+
+            <div class="report-card">
+
+                <div class="report-card-header">
+
+                    <div class="report-icon">
+                        ◷
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Daily Report
+                        </h3>
+
+                        <p>
+                            View activity for a specific day.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <form
+                    method="POST"
+                    class="report-form"
+                >
+
+                    {% csrf_token %}
+
+
+                    <label for="report_date">
+                        Select Date
+                    </label>
+
+
+                    <input
+                        type="date"
+                        id="report_date"
+                        name="report_date"
+                    >
+
+
+                    <button
+                        type="submit"
+                        class="report-submit"
+                    >
+                        Generate Report
+                        <span>→</span>
+                    </button>
+
+                </form>
+
+
+                {% if report_date %}
+
+                    <div class="daily-results">
+
+                        <div class="stat-box">
+
+                            <span>
+                                USERS PLAYED
+                            </span>
+
+                            <strong>
+                                {{ users_played }}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="stat-box">
+
+                            <span>
+                                CORRECT GUESSES
+                            </span>
+
+                            <strong>
+                                {{ correct_guesses }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="report-generated">
+
+                        Report generated for
+                        <strong>{{ report_date }}</strong>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+            <div class="report-card">
+
+                <div class="report-card-header">
+
+                    <div class="report-icon blue-icon">
+                        ◉
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            User Report
+                        </h3>
+
+                        <p>
+                            Analyse an individual player's history.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <form
+                    method="POST"
+                    class="report-form"
+                >
+
+                    {% csrf_token %}
+
+
+                    <label for="report_user">
+                        Select User
+                    </label>
+
+
+                    <select
+    id="report_user"
+    name="report_user"
+>
+
+    {% for user in users %}
+
+        <option
+            value="{{ user.id }}"
+            {% if selected_user and user.id == selected_user.id %}
+                selected
+            {% endif %}
         >
+            {{ user.username }}
+        </option>
 
-        <button type="submit">
-            Generate Report
-        </button>
+    {% endfor %}
 
-    </form>
+</select>
 
 
-    {% if report_date %}
+                    <button
+                        type="submit"
+                        name="user_report"
+                        class="report-submit blue-submit"
+                    >
+                        Generate Report
+                        <span>→</span>
+                    </button>
 
-        <h3>Report for {{ report_date }}</h3>
+                </form>
 
-        <p>
-            Users played: {{ users_played }}
-        </p>
 
-        <p>
-            Correct guesses: {{ correct_guesses }}
-        </p>
+                {% if user_report %}
 
-    {% endif %}
-<h2>User Report</h2>
+                    <div class="report-generated">
 
-<form method="POST">
+                        Report for
+                        <strong>
+                            {{ selected_user.username }}
+                        </strong>
 
-    {% csrf_token %}
+                    </div>
 
-    <label for="report_user">
-        Select User:
-    </label>
 
-    <select id="report_user" name="report_user">
+                    <div class="table-wrapper">
 
-        {% for user in users %}
-            <option value="{{ user.id }}">
-                {{ user.username }}
-            </option>
-        {% endfor %}
+                        <table class="report-table">
 
-    </select>
+                            <thead>
 
-    <button type="submit" name="user_report">
-        Generate User Report
-    </button>
-    
-</form>
-{% if user_report %}
+                                <tr>
 
-    <h3>
-        Report for {{ selected_user.username }}
-    </h3>
+                                    <th>
+                                        Date
+                                    </th>
 
-    <table border="1">
+                                    <th>
+                                        Words Tried
+                                    </th>
 
-        <tr>
-            <th>Date</th>
-            <th>Words Tried</th>
-            <th>Correct Guesses</th>
-        </tr>
+                                    <th>
+                                        Correct
+                                    </th>
 
-        {% for report in user_report %}
+                                </tr>
 
-            <tr>
-                <td>{{ report.date }}</td>
-                <td>{{ report.words_tried }}</td>
-                <td>{{ report.correct_guesses }}</td>
-            </tr>
+                            </thead>
 
-        {% endfor %}
 
-    </table>
+                            <tbody>
 
-{% endif %}
+                                {% for report in user_report %}
 
-    <p>
-        <a href="/game/">Back to Game</a>
-    </p>
+                                    <tr>
 
-    <p>
-        <a href="/admin/">Django Admin</a>
-    </p>
+                                        <td>
+                                            {{ report.date }}
+                                        </td>
 
-    <p>
-        <a href="/logout/">Logout</a>
-    </p>
+                                        <td>
+                                            {{ report.words_tried }}
+                                        </td>
+
+                                        <td class="correct-value">
+                                            {{ report.correct_guesses }}
+                                        </td>
+
+                                    </tr>
+
+                                {% endfor %}
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+        </section>
+
+        <section class="admin-tools">
+
+            <div>
+
+                <span class="tools-label">
+                    ADMIN TOOLS
+                </span>
+
+                <p>
+                    Manage the word database through Django Admin.
+                </p>
+
+            </div>
+
+
+            <a
+                href="/admin/"
+                class="admin-tools-button"
+            >
+                Open Django Admin
+                <span>↗</span>
+            </a>
+
+        </section>
+
+
+    </main>
+
+
 </body>
 
 </html>

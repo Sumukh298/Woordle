@@ -1,22 +1,83 @@
+{% load static %}
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Thanks for Playing</title>
+
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
 </head>
 
-<body>
 
-    <h1>Thanks for playing! 👋</h1>
+<body class="finish-page">
 
-    <p>Your game has ended.</p>
+    <div class="finish-glow finish-glow-one"></div>
+    <div class="finish-glow finish-glow-two"></div>
 
-    <a href="{% url 'logout' %}">
-        Logout
-    </a>
-    <a href="{% url 'game' %}">
-    <button type="button">Back to Game</button>
-</a>
+
+    <main class="finish-container">
+
+        <div class="finish-card">
+
+            <div class="finish-icon">
+                ✓
+            </div>
+
+
+            <span class="finish-eyebrow">
+                SESSION COMPLETE
+            </span>
+
+
+            <h1>
+                Thanks for playing.
+            </h1>
+
+
+            <p>
+                Your game has ended.
+                Ready for another round?
+            </p>
+
+
+            <div class="finish-divider"></div>
+
+
+            <div class="finish-actions">
+
+                <a
+                    href="{% url 'game' %}"
+                    class="finish-primary"
+                >
+                    Back to Game
+                    <span>→</span>
+                </a>
+
+
+                <a
+                    href="{% url 'logout' %}"
+                    class="finish-secondary"
+                >
+                    Logout
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <p class="finish-footer">
+            Guess smart. Play again.
+        </p>
+
+    </main>
 
 </body>
 

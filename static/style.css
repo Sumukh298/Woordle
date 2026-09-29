@@ -1,3 +1,7 @@
+/* ========================================
+   GAME TILE COLORS
+   ======================================== */
+
 .green {
     display: inline-block;
     width: 40px;
@@ -20,4 +24,2780 @@
     height: 40px;
     background-color: grey;
     margin: 3px;
+}
+
+
+/* ========================================
+   COLOR VARIABLES
+   ======================================== */
+
+:root {
+    --bg-dark: #06110f;
+    --bg-dark-2: #091a17;
+
+    --green: #20c997;
+    --green-light: #48e0b1;
+
+    --blue: #38bdf8;
+    --blue-light: #67d4ff;
+
+    --text-main: #edfdf8;
+    --text-secondary: #a4bdb7;
+    --text-muted: #6f8983;
+
+    --border: rgba(72, 224, 177, 0.18);
+
+    --card-bg: rgba(10, 27, 24, 0.78);
+}
+
+
+/* ========================================
+   BASIC RESET
+   ======================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+
+/* ========================================
+   LOGIN + REGISTER PAGE BACKGROUND
+   ======================================== */
+
+.auth-page,
+.register-page {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(32, 201, 151, 0.12),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 85% 85%,
+            rgba(56, 189, 248, 0.11),
+            transparent 32%
+        ),
+        linear-gradient(
+            135deg,
+            var(--bg-dark),
+            var(--bg-dark-2)
+        );
+
+    color: var(--text-main);
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    overflow: hidden;
+}
+
+
+/* ========================================
+   AMBIENT GLOW EFFECTS
+   ======================================== */
+
+.auth-glow {
+    position: fixed;
+
+    width: 360px;
+    height: 360px;
+
+    border-radius: 50%;
+
+    filter: blur(110px);
+
+    opacity: 0.25;
+
+    pointer-events: none;
+
+    animation: floatingGlow 9s ease-in-out infinite alternate;
+}
+
+.glow-one {
+    background: var(--green);
+
+    top: -180px;
+    left: -120px;
+}
+
+.glow-two {
+    background: var(--blue);
+
+    bottom: -180px;
+    right: -120px;
+
+    animation-delay: -4s;
+}
+
+
+/* ========================================
+   LOGIN CARD
+   ======================================== */
+
+.auth-card {
+    position: relative;
+
+    width: 390px;
+
+    margin: auto;
+
+    padding: 42px;
+
+    background: var(--card-bg);
+
+    border: 1px solid var(--border);
+
+    border-radius: 22px;
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.45),
+        0 0 50px rgba(32, 201, 151, 0.05);
+
+    animation: cardAppear 0.7s ease-out;
+}
+
+
+/* ========================================
+   REGISTER CARD
+   ======================================== */
+
+.register-page {
+    justify-content: center;
+
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.register-card {
+    position: relative;
+
+    width: 420px;
+
+    padding: 42px;
+
+    background: var(--card-bg);
+
+    border: 1px solid var(--border);
+
+    border-radius: 22px;
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.45),
+        0 0 50px rgba(32, 201, 151, 0.05);
+
+    animation: cardAppear 0.7s ease-out;
+}
+
+
+/* ========================================
+   LOGO
+   ======================================== */
+
+.logo-mark {
+    width: 46px;
+    height: 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 18px;
+
+    border-radius: 13px;
+
+    background: linear-gradient(
+        135deg,
+        var(--green),
+        var(--blue)
+    );
+
+    color: #04100d;
+
+    font-size: 14px;
+    font-weight: 800;
+
+    letter-spacing: -0.5px;
+
+    box-shadow:
+        0 8px 28px rgba(32, 201, 151, 0.2);
+}
+
+
+/* ========================================
+   HEADERS
+   ======================================== */
+
+.auth-header,
+.register-header {
+    margin-bottom: 32px;
+}
+
+.auth-header h1,
+.register-header h1 {
+    margin: 0 0 8px;
+
+    color: var(--text-main);
+
+    font-size: 30px;
+    font-weight: 700;
+
+    letter-spacing: -0.8px;
+}
+
+.auth-header p,
+.register-header p {
+    margin: 0;
+
+    color: var(--text-muted);
+
+    font-size: 14px;
+}
+
+
+/* ========================================
+   FORM
+   ======================================== */
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+
+/* ========================================
+   LOGIN INPUT GROUP
+   ======================================== */
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.input-group label {
+    color: #b9d2cc;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.input-group input {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    border: 1px solid rgba(141, 169, 163, 0.18);
+
+    border-radius: 10px;
+
+    outline: none;
+
+    background: rgba(3, 12, 11, 0.55);
+
+    color: var(--text-main);
+
+    font-family: inherit;
+    font-size: 14px;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+
+.input-group input::placeholder {
+    color: #607a74;
+}
+
+.input-group input:focus {
+    border-color: rgba(56, 189, 248, 0.7);
+
+    background: rgba(5, 18, 16, 0.8);
+
+    box-shadow:
+        0 0 0 3px rgba(56, 189, 248, 0.08),
+        0 0 20px rgba(32, 201, 151, 0.08);
+}
+
+
+/* ========================================
+   REGISTER DJANGO FORM
+   ======================================== */
+
+.register-card form p {
+    margin: 0 0 18px;
+}
+
+.register-card form p label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #b9d2cc;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.register-card form p input {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    border: 1px solid rgba(141, 169, 163, 0.18);
+
+    border-radius: 10px;
+
+    outline: none;
+
+    background: rgba(3, 12, 11, 0.55);
+
+    color: var(--text-main);
+
+    font-family: inherit;
+    font-size: 14px;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+
+.register-card form p input:focus {
+    border-color: rgba(56, 189, 248, 0.7);
+
+    background: rgba(5, 18, 16, 0.8);
+
+    box-shadow:
+        0 0 0 3px rgba(56, 189, 248, 0.08),
+        0 0 20px rgba(32, 201, 151, 0.08);
+}
+
+
+/* Django help text */
+
+.register-card form p span {
+    display: block;
+
+    margin-top: 6px;
+
+    color: var(--text-muted);
+
+    font-size: 11px;
+}
+
+
+/* ========================================
+   BUTTON
+   ======================================== */
+
+.auth-button {
+    width: 100%;
+
+    margin-top: 5px;
+
+    padding: 13px 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    border: none;
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            110deg,
+            var(--green),
+            var(--blue)
+        );
+
+    color: #04100d;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
+}
+
+.auth-button span {
+    font-size: 18px;
+
+    transition:
+        transform 0.2s ease;
+}
+
+.auth-button:hover {
+    transform: translateY(-2px);
+
+    filter: brightness(1.05);
+
+    box-shadow:
+        0 10px 30px rgba(32, 201, 151, 0.22);
+}
+
+.auth-button:hover span {
+    transform: translateX(4px);
+}
+
+.auth-button:active {
+    transform: translateY(0);
+}
+
+
+/* ========================================
+   LOGIN / REGISTER SWITCH LINK
+   ======================================== */
+
+.auth-switch {
+    margin: 25px 0 0;
+
+    text-align: center;
+
+    color: var(--text-muted);
+
+    font-size: 13px;
+}
+
+.auth-switch a {
+    color: var(--green-light);
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    transition:
+        color 0.2s ease;
+}
+
+.auth-switch a:hover {
+    color: var(--blue-light);
+}
+
+
+/* ========================================
+   LOGIN ERROR
+   ======================================== */
+
+.auth-error {
+    margin: 0 0 20px;
+
+    padding: 10px 12px;
+
+    border: 1px solid rgba(255, 90, 90, 0.25);
+
+    border-radius: 8px;
+
+    background: rgba(255, 70, 70, 0.08);
+
+    color: #ff9b9b;
+
+    font-size: 13px;
+}
+
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+@keyframes cardAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+@keyframes floatingGlow {
+
+    from {
+        transform:
+            translate(0, 0);
+    }
+
+    to {
+        transform:
+            translate(35px, 25px);
+    }
+}
+
+
+/* ========================================
+   MOBILE
+   ======================================== */
+
+@media (max-width: 700px) {
+
+    .auth-card,
+    .register-card {
+        width: calc(100% - 40px);
+
+        padding: 30px;
+    }
+
+    .register-page {
+        justify-content: center;
+
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .auth-header h1,
+    .register-header h1 {
+        font-size: 26px;
+    }
+}
+/* ========================================
+   GAME PAGE
+   ======================================== */
+
+.game-page {
+    min-height: 100vh;
+    margin: 0;
+
+    background:
+        radial-gradient(
+            circle at 10% 20%,
+            rgba(32, 201, 151, 0.08),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 80%,
+            rgba(56, 189, 248, 0.08),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #06110f,
+            #081715
+        );
+
+    color: #edfdf8;
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    overflow-x: hidden;
+}
+
+
+/* ========================================
+   TOP HEADER
+   ======================================== */
+
+.game-header {
+    width: 100%;
+
+    padding: 24px 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid rgba(72, 224, 177, 0.08);
+
+    background: rgba(4, 15, 13, 0.55);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    box-sizing: border-box;
+}
+
+
+/* Brand */
+
+.game-brand {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+}
+
+.game-logo {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #20c997,
+            #38bdf8
+        );
+
+    color: #04100d;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    box-shadow:
+        0 8px 25px rgba(32, 201, 151, 0.15);
+}
+
+.game-brand h1 {
+    margin: 0;
+
+    font-size: 17px;
+    font-weight: 650;
+
+    letter-spacing: -0.3px;
+}
+
+.game-brand p {
+    margin: 3px 0 0;
+
+    color: #718d86;
+
+    font-size: 12px;
+}
+
+
+/* ========================================
+   HEADER BUTTONS
+   ======================================== */
+
+.game-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+.logout-button,
+.admin-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 9px 15px;
+
+    border-radius: 9px;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.logout-button {
+    color: #b9d2cc;
+
+    border: 1px solid rgba(141, 169, 163, 0.16);
+
+    background: rgba(255, 255, 255, 0.035);
+}
+
+.logout-button:hover {
+    background: rgba(255, 255, 255, 0.07);
+
+    transform: translateY(-1px);
+}
+
+.admin-button {
+    color: #65d9ff;
+
+    border: 1px solid rgba(56, 189, 248, 0.2);
+
+    background: rgba(56, 189, 248, 0.06);
+}
+
+.admin-button:hover {
+    background: rgba(56, 189, 248, 0.11);
+
+    transform: translateY(-1px);
+}
+
+
+/* ========================================
+   MAIN GAME CONTAINER
+   ======================================== */
+
+.game-container {
+    width: min(620px, calc(100% - 40px));
+
+    margin: 0 auto;
+
+    padding: 65px 0 80px;
+
+    text-align: center;
+}
+
+
+/* ========================================
+   GAME INTRO
+   ======================================== */
+
+.game-intro {
+    margin-bottom: 38px;
+}
+
+.eyebrow {
+    display: inline-block;
+
+    margin-bottom: 12px;
+
+    color: #32d9aa;
+
+    font-size: 10px;
+    font-weight: 750;
+
+    letter-spacing: 2.5px;
+}
+
+.game-intro h2 {
+    margin: 0 0 10px;
+
+    font-size: 34px;
+    font-weight: 700;
+
+    letter-spacing: -1px;
+}
+
+.game-intro p {
+    max-width: 420px;
+
+    margin: 0 auto;
+
+    color: #78938d;
+
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* ========================================
+   GUESS BOARD
+   ======================================== */
+
+.guess-board {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 9px;
+
+    min-height: 0;
+
+    margin-bottom: 35px;
+}
+
+
+/* Every submitted guess */
+
+.guess-row {
+    display: flex;
+
+    gap: 9px;
+
+    justify-content: center;
+
+    animation: guessAppear 0.35s ease-out;
+}
+
+
+/* ========================================
+   GUESS TILES
+   ======================================== */
+
+.guess-tile {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    font-size: 20px;
+    font-weight: 750;
+
+    letter-spacing: 0.5px;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* Correct position */
+
+.guess-tile.green {
+    background:
+        linear-gradient(
+            145deg,
+            #168f72,
+            #20b78f
+        );
+
+    border: 1px solid rgba(72, 224, 177, 0.55);
+
+    color: #eafff8;
+
+    box-shadow:
+        0 5px 18px rgba(32, 201, 151, 0.18);
+}
+
+
+/* Correct letter, wrong position */
+
+.guess-tile.orange {
+    background:
+        linear-gradient(
+            145deg,
+            #9a6b20,
+            #c28a2d
+        );
+
+    border: 1px solid rgba(230, 181, 78, 0.45);
+
+    color: #fff8df;
+
+    box-shadow:
+        0 5px 18px rgba(194, 138, 45, 0.14);
+}
+
+
+/* Letter doesn't exist */
+
+.guess-tile.grey {
+    background:
+        linear-gradient(
+            145deg,
+            #253431,
+            #30433f
+        );
+
+    border: 1px solid rgba(141, 169, 163, 0.16);
+
+    color: #a4b5b1;
+}
+
+
+/* Tile hover */
+
+.guess-tile:hover {
+    transform: translateY(-2px);
+}
+
+
+/* ========================================
+   GUESS INPUT
+   ======================================== */
+
+.guess-form {
+    width: min(430px, 100%);
+
+    margin: 0 auto;
+
+    display: flex;
+
+    gap: 10px;
+}
+
+.guess-form input {
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 15px 18px;
+
+    border: 1px solid rgba(72, 224, 177, 0.17);
+
+    border-radius: 11px;
+
+    outline: none;
+
+    background: rgba(3, 12, 11, 0.6);
+
+    color: #edfdf8;
+
+    font-family: inherit;
+
+    font-size: 15px;
+    font-weight: 650;
+
+    letter-spacing: 2px;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.guess-form input::placeholder {
+    color: #536d67;
+
+    letter-spacing: 1.5px;
+}
+
+.guess-form input:focus {
+    border-color: rgba(56, 189, 248, 0.65);
+
+    box-shadow:
+        0 0 0 3px rgba(56, 189, 248, 0.07),
+        0 0 25px rgba(32, 201, 151, 0.07);
+}
+
+
+/* ========================================
+   GUESS BUTTON
+   ======================================== */
+
+.guess-button,
+.primary-button {
+    border: none;
+
+    border-radius: 10px;
+
+    padding: 0 20px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    background:
+        linear-gradient(
+            110deg,
+            #20c997,
+            #38bdf8
+        );
+
+    color: #04100d;
+
+    font-family: inherit;
+
+    font-size: 13px;
+    font-weight: 750;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.guess-button span,
+.primary-button span {
+    font-size: 17px;
+
+    transition:
+        transform 0.2s ease;
+}
+
+.guess-button:hover,
+.primary-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 28px rgba(32, 201, 151, 0.2);
+}
+
+.guess-button:hover span,
+.primary-button:hover span {
+    transform: translateX(3px);
+}
+
+
+/* ========================================
+   ERROR
+   ======================================== */
+
+.game-error {
+    width: min(430px, 100%);
+
+    margin: 0 auto 16px;
+
+    padding: 10px 14px;
+
+    border-radius: 9px;
+
+    border: 1px solid rgba(255, 90, 90, 0.2);
+
+    background: rgba(255, 70, 70, 0.06);
+
+    color: #ff9b9b;
+
+    font-size: 13px;
+}
+
+
+/* ========================================
+   RESULT CARD
+   ======================================== */
+
+.result-card,
+.game-message-card {
+    width: min(460px, 100%);
+
+    margin: 0 auto;
+
+    padding: 32px;
+
+    box-sizing: border-box;
+
+    border-radius: 18px;
+
+    border: 1px solid rgba(72, 224, 177, 0.13);
+
+    background:
+        rgba(9, 25, 22, 0.72);
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.25);
+
+    backdrop-filter: blur(15px);
+}
+
+
+/* ========================================
+   RESULT ICON
+   ======================================== */
+
+.result-icon,
+.message-icon {
+    width: 48px;
+    height: 48px;
+
+    margin: 0 auto 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.result-icon.success,
+.message-icon {
+    background: rgba(32, 201, 151, 0.12);
+
+    border: 1px solid rgba(32, 201, 151, 0.3);
+
+    color: #48e0b1;
+
+    box-shadow:
+        0 0 25px rgba(32, 201, 151, 0.08);
+}
+
+.result-icon.failure {
+    background: rgba(194, 138, 45, 0.1);
+
+    border: 1px solid rgba(194, 138, 45, 0.25);
+
+    color: #e4b45c;
+}
+
+
+/* ========================================
+   RESULT TEXT
+   ======================================== */
+
+.result-label {
+    color: #32d9aa;
+
+    font-size: 10px;
+    font-weight: 750;
+
+    letter-spacing: 2px;
+}
+
+.result-card h2,
+.game-message-card h2 {
+    margin: 8px 0;
+
+    font-size: 25px;
+}
+
+.result-card p,
+.game-message-card p {
+    margin: 0;
+
+    color: #78938d;
+
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.result-card strong {
+    color: #edfdf8;
+
+    letter-spacing: 2px;
+}
+
+
+/* ========================================
+   RESULT BUTTONS
+   ======================================== */
+
+.result-actions {
+    margin-top: 25px;
+
+    display: flex;
+    justify-content: center;
+
+    gap: 10px;
+}
+
+.result-actions form {
+    margin: 0;
+}
+
+.secondary-button {
+    padding: 11px 18px;
+
+    border: 1px solid rgba(141, 169, 163, 0.18);
+
+    border-radius: 9px;
+
+    background: rgba(255, 255, 255, 0.035);
+
+    color: #b9d2cc;
+
+    font-family: inherit;
+
+    font-size: 12px;
+    font-weight: 650;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.secondary-button:hover {
+    background: rgba(255, 255, 255, 0.07);
+
+    transform: translateY(-1px);
+}
+
+
+/* ========================================
+   DAILY LIMIT
+   ======================================== */
+
+.game-message-card {
+    margin-top: 80px;
+}
+
+.game-message-card h2 {
+    color: #edfdf8;
+}
+
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+@keyframes guessAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(8px)
+            scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+/* ========================================
+   RESPONSIVE GAME
+   ======================================== */
+
+@media (max-width: 650px) {
+
+    .game-header {
+        padding: 18px 20px;
+    }
+
+    .game-brand h1 {
+        font-size: 15px;
+    }
+
+    .game-container {
+        padding-top: 45px;
+    }
+
+    .game-intro h2 {
+        font-size: 28px;
+    }
+
+    .guess-tile {
+        width: 52px;
+        height: 52px;
+
+        font-size: 18px;
+    }
+
+    .guess-form {
+        flex-direction: column;
+    }
+
+    .guess-button {
+        min-height: 46px;
+    }
+}
+/* ========================================
+   GAME PAGE - FINAL COMPACT LAYOUT
+   ======================================== */
+
+.game-page {
+    height: 100vh;
+    min-height: 100vh;
+
+    overflow: hidden;
+}
+
+
+/* ========================================
+   HEADER
+   ======================================== */
+
+.game-header {
+    height: 78px;
+
+    padding: 16px 42px;
+}
+
+
+/* ========================================
+   MAIN GAME AREA
+   ======================================== */
+
+.game-container {
+    width: min(620px, calc(100% - 40px));
+
+    height: calc(100vh - 78px);
+
+    margin: 0 auto;
+
+    padding: 28px 0 24px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+
+    overflow: hidden;
+}
+
+
+/* ========================================
+   INTRO
+   ======================================== */
+
+.game-intro {
+    margin-bottom: 20px;
+}
+
+.eyebrow {
+    margin-bottom: 7px;
+
+    font-size: 9px;
+    letter-spacing: 2.3px;
+}
+
+.game-intro h2 {
+    margin: 0 0 6px;
+
+    font-size: 29px;
+    letter-spacing: -0.8px;
+}
+
+.game-intro p {
+    max-width: 430px;
+
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+
+/* ========================================
+   GUESS BOARD
+   ======================================== */
+
+.guess-board {
+    gap: 6px;
+
+    margin-bottom: 18px;
+}
+
+
+/* ========================================
+   GUESS ROW
+   ======================================== */
+
+.guess-row {
+    gap: 6px;
+}
+
+
+/* ========================================
+   GUESS TILES
+   ======================================== */
+
+.guess-tile {
+    width: 52px;
+    height: 52px;
+
+    border-radius: 10px;
+
+    font-size: 18px;
+}
+
+
+/* ========================================
+   GUESS INPUT
+   ======================================== */
+
+.guess-form {
+    width: min(400px, 100%);
+
+    gap: 8px;
+}
+
+.guess-form input {
+    padding: 12px 16px;
+
+    font-size: 14px;
+}
+
+.guess-button {
+    padding: 0 17px;
+}
+
+
+/* ========================================
+   RESULT CARD
+   ======================================== */
+
+.result-card {
+    width: min(430px, 100%);
+
+    padding: 20px 24px;
+
+    border-radius: 16px;
+}
+
+
+/* Smaller result icon */
+
+.result-icon {
+    width: 38px;
+    height: 38px;
+
+    margin-bottom: 9px;
+
+    font-size: 17px;
+}
+
+
+/* Result text */
+
+.result-label {
+    font-size: 9px;
+
+    letter-spacing: 1.8px;
+}
+
+.result-card h2 {
+    margin: 5px 0;
+
+    font-size: 21px;
+}
+
+.result-card p {
+    font-size: 12px;
+}
+
+
+/* ========================================
+   RESULT BUTTONS
+   ======================================== */
+
+.result-actions {
+    margin-top: 17px;
+
+    gap: 8px;
+}
+
+
+/* Finish button */
+
+.secondary-button {
+    padding: 10px 18px;
+
+    border: 1px solid rgba(56, 189, 248, 0.28);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(56, 189, 248, 0.08),
+            rgba(32, 201, 151, 0.05)
+        );
+
+    color: #70d8ff;
+
+    box-shadow:
+        0 0 18px rgba(56, 189, 248, 0.04);
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.secondary-button:hover {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(56, 189, 248, 0.14),
+            rgba(32, 201, 151, 0.09)
+        );
+
+    border-color: rgba(56, 189, 248, 0.45);
+
+    box-shadow:
+        0 8px 22px rgba(56, 189, 248, 0.08);
+
+    transform: translateY(-1px);
+}
+
+
+/* ========================================
+   DAILY LIMIT CARD
+   ======================================== */
+
+.game-message-card {
+    margin-top: 60px;
+
+    padding: 25px;
+}
+
+
+/* ========================================
+   DESKTOP VIEWPORT SAFETY
+   ======================================== */
+
+@media (min-width: 701px) {
+
+    .game-page {
+        overflow: hidden;
+    }
+}
+
+
+/* ========================================
+   MOBILE
+   ======================================== */
+
+@media (max-width: 700px) {
+
+    .game-page {
+        height: auto;
+        min-height: 100vh;
+
+        overflow-y: auto;
+    }
+
+    .game-header {
+        height: auto;
+
+        padding: 16px 20px;
+    }
+
+    .game-container {
+        height: auto;
+
+        min-height: calc(100vh - 70px);
+
+        padding:
+            30px 0
+            40px;
+    }
+
+    .game-intro h2 {
+        font-size: 27px;
+    }
+
+    .guess-tile {
+        width: 48px;
+        height: 48px;
+
+        font-size: 17px;
+    }
+}
+/* ========================================
+   REPORTS PAGE
+   ======================================== */
+
+.reports-page {
+    min-height: 100vh;
+    margin: 0;
+
+    background:
+        radial-gradient(
+            circle at 8% 15%,
+            rgba(32, 201, 151, 0.08),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 92% 80%,
+            rgba(56, 189, 248, 0.08),
+            transparent 28%
+        ),
+        linear-gradient(
+            135deg,
+            #06110f,
+            #081715
+        );
+
+    color: #edfdf8;
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+}
+
+
+/* ========================================
+   REPORT HEADER
+   ======================================== */
+
+.reports-header {
+    height: 78px;
+
+    padding: 16px 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    box-sizing: border-box;
+
+    border-bottom: 1px solid rgba(72, 224, 177, 0.08);
+
+    background: rgba(4, 15, 13, 0.65);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+
+.reports-brand {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+}
+
+
+.reports-logo {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #20c997,
+            #38bdf8
+        );
+
+    color: #04100d;
+
+    font-size: 13px;
+    font-weight: 800;
+}
+
+
+.reports-brand h1 {
+    margin: 0;
+
+    font-size: 17px;
+}
+
+
+.reports-brand p {
+    margin: 3px 0 0;
+
+    color: #718d86;
+
+    font-size: 12px;
+}
+
+
+.reports-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+}
+
+
+/* ========================================
+   REPORT HEADER BUTTONS
+   ======================================== */
+
+.download-button,
+.back-game-button,
+.logout-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 9px 14px;
+
+    border-radius: 9px;
+
+    font-family: inherit;
+
+    font-size: 12px;
+    font-weight: 650;
+
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+
+.download-button {
+    border: 1px solid rgba(32, 201, 151, 0.25);
+
+    background: rgba(32, 201, 151, 0.07);
+
+    color: #48e0b1;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.download-button:hover {
+    background: rgba(32, 201, 151, 0.13);
+
+    transform: translateY(-1px);
+}
+
+
+.back-game-button {
+    border: 1px solid rgba(56, 189, 248, 0.2);
+
+    background: rgba(56, 189, 248, 0.05);
+
+    color: #65d4ff;
+}
+
+
+.back-game-button:hover {
+    background: rgba(56, 189, 248, 0.1);
+}
+
+
+/* ========================================
+   REPORT MAIN
+   ======================================== */
+
+.reports-container {
+    width: min(1050px, calc(100% - 50px));
+
+    margin: 0 auto;
+
+    padding: 50px 0 60px;
+}
+
+
+.reports-intro {
+    margin-bottom: 35px;
+}
+
+
+.reports-intro .eyebrow {
+    margin-bottom: 9px;
+}
+
+
+.reports-intro h2 {
+    margin: 0 0 7px;
+
+    font-size: 32px;
+
+    letter-spacing: -0.8px;
+}
+
+
+.reports-intro p {
+    margin: 0;
+
+    color: #718d86;
+
+    font-size: 13px;
+}
+
+
+/* ========================================
+   REPORT GRID
+   ======================================== */
+
+.report-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 20px;
+}
+
+
+.report-card {
+    padding: 27px;
+
+    border-radius: 18px;
+
+    border: 1px solid rgba(72, 224, 177, 0.11);
+
+    background:
+        rgba(9, 25, 22, 0.72);
+
+    box-shadow:
+        0 18px 55px rgba(0, 0, 0, 0.2);
+
+    backdrop-filter: blur(15px);
+
+    transition:
+        border-color 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+.report-card:hover {
+    border-color: rgba(72, 224, 177, 0.2);
+
+    transform: translateY(-2px);
+}
+
+
+/* ========================================
+   CARD HEADER
+   ======================================== */
+
+.report-card-header {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    margin-bottom: 25px;
+}
+
+
+.report-icon {
+    width: 39px;
+    height: 39px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background: rgba(32, 201, 151, 0.1);
+
+    border: 1px solid rgba(32, 201, 151, 0.2);
+
+    color: #48e0b1;
+
+    font-size: 17px;
+}
+
+
+.blue-icon {
+    background: rgba(56, 189, 248, 0.08);
+
+    border-color: rgba(56, 189, 248, 0.2);
+
+    color: #65d4ff;
+}
+
+
+.report-card-header h3 {
+    margin: 0 0 4px;
+
+    font-size: 16px;
+}
+
+
+.report-card-header p {
+    margin: 0;
+
+    color: #6f8983;
+
+    font-size: 11px;
+}
+
+
+/* ========================================
+   REPORT FORM
+   ======================================== */
+
+.report-form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 9px;
+}
+
+
+.report-form label {
+    color: #9ab3ad;
+
+    font-size: 11px;
+    font-weight: 650;
+}
+
+
+.report-form input,
+.report-form select {
+    width: 100%;
+
+    padding: 12px 13px;
+
+    box-sizing: border-box;
+
+    border: 1px solid rgba(141, 169, 163, 0.15);
+
+    border-radius: 9px;
+
+    outline: none;
+
+    background: rgba(3, 12, 11, 0.58);
+
+    color: #edfdf8;
+
+    font-family: inherit;
+
+    font-size: 13px;
+}
+
+
+.report-form input:focus,
+.report-form select:focus {
+    border-color: rgba(56, 189, 248, 0.55);
+
+    box-shadow:
+        0 0 0 3px rgba(56, 189, 248, 0.06);
+}
+
+
+.report-form select option {
+    background: #0a1c18;
+
+    color: #edfdf8;
+}
+
+
+/* ========================================
+   REPORT SUBMIT BUTTON
+   ======================================== */
+
+.report-submit {
+    margin-top: 7px;
+
+    padding: 11px 15px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    background:
+        linear-gradient(
+            110deg,
+            #20c997,
+            #38bdf8
+        );
+
+    color: #04100d;
+
+    font-family: inherit;
+
+    font-size: 12px;
+    font-weight: 750;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.report-submit:hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 22px rgba(32, 201, 151, 0.17);
+}
+
+
+.blue-submit {
+    background:
+        linear-gradient(
+            110deg,
+            #38bdf8,
+            #20c997
+        );
+}
+
+
+/* ========================================
+   DAILY STATS
+   ======================================== */
+
+.daily-results {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+
+.stat-box {
+    padding: 17px;
+
+    border-radius: 11px;
+
+    background: rgba(255, 255, 255, 0.025);
+
+    border: 1px solid rgba(141, 169, 163, 0.09);
+}
+
+
+.stat-box span {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #66817a;
+
+    font-size: 8px;
+    font-weight: 750;
+
+    letter-spacing: 1.4px;
+}
+
+
+.stat-box strong {
+    color: #edfdf8;
+
+    font-size: 25px;
+}
+
+
+/* ========================================
+   REPORT GENERATED LABEL
+   ======================================== */
+
+.report-generated {
+    margin-top: 16px;
+
+    color: #708b84;
+
+    font-size: 10px;
+}
+
+
+.report-generated strong {
+    color: #48e0b1;
+}
+
+
+/* ========================================
+   USER REPORT TABLE
+   ======================================== */
+
+.table-wrapper {
+    margin-top: 15px;
+
+    overflow-x: auto;
+
+    border-radius: 10px;
+
+    border: 1px solid rgba(141, 169, 163, 0.09);
+}
+
+
+.report-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    font-size: 11px;
+}
+
+
+.report-table th {
+    padding: 11px;
+
+    text-align: left;
+
+    background: rgba(255, 255, 255, 0.025);
+
+    color: #6f8983;
+
+    font-size: 9px;
+
+    letter-spacing: 0.7px;
+}
+
+
+.report-table td {
+    padding: 11px;
+
+    border-top: 1px solid rgba(141, 169, 163, 0.07);
+
+    color: #a7beb8;
+}
+
+
+.report-table tbody tr {
+    transition:
+        background 0.2s ease;
+}
+
+
+.report-table tbody tr:hover {
+    background: rgba(72, 224, 177, 0.025);
+}
+
+
+.correct-value {
+    color: #48e0b1 !important;
+
+    font-weight: 700;
+}
+
+
+/* ========================================
+   ADMIN TOOLS
+   ======================================== */
+
+.admin-tools {
+    margin-top: 20px;
+
+    padding: 18px 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-radius: 14px;
+
+    border: 1px solid rgba(56, 189, 248, 0.1);
+
+    background:
+        rgba(56, 189, 248, 0.025);
+}
+
+
+.tools-label {
+    color: #65d4ff;
+
+    font-size: 9px;
+    font-weight: 750;
+
+    letter-spacing: 1.5px;
+}
+
+
+.admin-tools p {
+    margin: 5px 0 0;
+
+    color: #718d86;
+
+    font-size: 11px;
+}
+
+
+.admin-tools-button {
+    padding: 9px 14px;
+
+    border-radius: 8px;
+
+    border: 1px solid rgba(56, 189, 248, 0.2);
+
+    background: rgba(56, 189, 248, 0.06);
+
+    color: #65d4ff;
+
+    text-decoration: none;
+
+    font-size: 11px;
+    font-weight: 650;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.admin-tools-button:hover {
+    background: rgba(56, 189, 248, 0.12);
+
+    transform: translateY(-1px);
+}
+
+
+/* ========================================
+   FINISH / THANK YOU PAGE
+   ======================================== */
+
+.finish-page {
+    min-height: 100vh;
+
+    margin: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at 25% 25%,
+            rgba(32, 201, 151, 0.12),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 75% 75%,
+            rgba(56, 189, 248, 0.11),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #06110f,
+            #081715
+        );
+
+    color: #edfdf8;
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    overflow: hidden;
+}
+
+
+/* ========================================
+   FINISH GLOW
+   ======================================== */
+
+.finish-glow {
+    position: fixed;
+
+    width: 350px;
+    height: 350px;
+
+    border-radius: 50%;
+
+    filter: blur(110px);
+
+    opacity: 0.22;
+
+    pointer-events: none;
+
+    animation:
+        finishFloat 8s ease-in-out infinite alternate;
+}
+
+
+.finish-glow-one {
+    top: -170px;
+    left: -120px;
+
+    background: #20c997;
+}
+
+
+.finish-glow-two {
+    right: -130px;
+    bottom: -180px;
+
+    background: #38bdf8;
+
+    animation-delay: -4s;
+}
+
+
+/* ========================================
+   FINISH CONTAINER
+   ======================================== */
+
+.finish-container {
+    position: relative;
+
+    width: min(500px, calc(100% - 40px));
+
+    text-align: center;
+}
+
+
+.finish-card {
+    padding: 48px 45px;
+
+    border-radius: 24px;
+
+    border: 1px solid rgba(72, 224, 177, 0.14);
+
+    background:
+        rgba(9, 25, 22, 0.76);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.4),
+        0 0 60px rgba(32, 201, 151, 0.05);
+
+    animation:
+        finishAppear 0.8s ease-out;
+}
+
+
+/* ========================================
+   FINISH ICON
+   ======================================== */
+
+.finish-icon {
+    width: 62px;
+    height: 62px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(32, 201, 151, 0.18),
+            rgba(56, 189, 248, 0.12)
+        );
+
+    border: 1px solid rgba(72, 224, 177, 0.3);
+
+    color: #48e0b1;
+
+    font-size: 25px;
+    font-weight: 800;
+
+    box-shadow:
+        0 0 35px rgba(32, 201, 151, 0.1);
+}
+
+
+/* ========================================
+   FINISH TEXT
+   ======================================== */
+
+.finish-eyebrow {
+    color: #32d9aa;
+
+    font-size: 9px;
+    font-weight: 750;
+
+    letter-spacing: 2.5px;
+}
+
+
+.finish-card h1 {
+    margin: 10px 0 10px;
+
+    font-size: 32px;
+
+    letter-spacing: -0.8px;
+}
+
+
+.finish-card p {
+    margin: 0 auto;
+
+    color: #78938d;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+/* ========================================
+   DIVIDER
+   ======================================== */
+
+.finish-divider {
+    width: 60px;
+    height: 1px;
+
+    margin: 28px auto;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(72, 224, 177, 0.5),
+            transparent
+        );
+}
+
+
+/* ========================================
+   FINISH BUTTONS
+   ======================================== */
+
+.finish-actions {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+}
+
+
+.finish-primary,
+.finish-secondary {
+    padding: 11px 18px;
+
+    border-radius: 9px;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.finish-primary {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 8px;
+
+    background:
+        linear-gradient(
+            110deg,
+            #20c997,
+            #38bdf8
+        );
+
+    color: #04100d;
+}
+
+
+.finish-primary span {
+    transition:
+        transform 0.2s ease;
+}
+
+
+.finish-primary:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 28px rgba(32, 201, 151, 0.2);
+}
+
+
+.finish-primary:hover span {
+    transform: translateX(3px);
+}
+
+
+.finish-secondary {
+    border: 1px solid rgba(141, 169, 163, 0.17);
+
+    background: rgba(255, 255, 255, 0.035);
+
+    color: #b9d2cc;
+}
+
+
+.finish-secondary:hover {
+    background: rgba(255, 255, 255, 0.07);
+
+    transform: translateY(-1px);
+}
+
+
+/* ========================================
+   FINISH FOOTER
+   ======================================== */
+
+.finish-footer {
+    margin-top: 22px !important;
+
+    color: #48635d !important;
+
+    font-size: 10px !important;
+
+    letter-spacing: 0.5px;
+}
+
+
+/* ========================================
+   FINISH ANIMATION
+   ======================================== */
+
+@keyframes finishAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(18px)
+            scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+@keyframes finishFloat {
+
+    from {
+        transform:
+            translate(0, 0);
+    }
+
+    to {
+        transform:
+            translate(30px, 25px);
+    }
+}
+
+
+/* ========================================
+   REPORT RESPONSIVE
+   ======================================== */
+
+@media (max-width: 800px) {
+
+    .reports-header {
+        height: auto;
+
+        padding: 16px 20px;
+
+        gap: 15px;
+    }
+
+    .reports-actions {
+        flex-wrap: wrap;
+
+        justify-content: flex-end;
+    }
+
+    .reports-container {
+        width: calc(100% - 30px);
+
+        padding-top: 35px;
+    }
+
+    .report-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .reports-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .reports-actions {
+        width: 100%;
+
+        justify-content: flex-start;
+    }
+
+    .daily-results {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .admin-tools {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .finish-card {
+        padding: 38px 25px;
+    }
+
+    .finish-card h1 {
+        font-size: 27px;
+    }
+}
+
+
+/* ========================================
+   PRINT / SAVE AS PDF
+   ======================================== */
+
+@media print {
+
+    body {
+        background: white !important;
+
+        color: black !important;
+    }
+
+    .reports-header,
+    .admin-tools,
+    .report-form,
+    .download-button,
+    .back-game-button,
+    .logout-button {
+        display: none !important;
+    }
+
+    .reports-page {
+        background: white !important;
+
+        color: black !important;
+    }
+
+    .reports-container {
+        width: 100%;
+
+        padding: 20px;
+    }
+
+    .reports-intro h2,
+    .report-card h3,
+    .reports-intro p,
+    .report-card-header p,
+    .stat-box strong,
+    .report-table td {
+        color: black !important;
+    }
+
+    .report-card {
+        background: white !important;
+
+        border: 1px solid #cccccc;
+
+        box-shadow: none;
+    }
+
+    .report-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .stat-box {
+        background: white;
+
+        border: 1px solid #cccccc;
+    }
+
+    .report-table th {
+        color: black !important;
+
+        background: #eeeeee;
+    }
+
+    .report-table td {
+        border-color: #dddddd;
+    }
+}
+/* ========================================
+   DATE PICKER
+   ======================================== */
+
+.report-form input[type="date"] {
+    color-scheme: dark;
+}
+
+/* Make Chrome's calendar icon visible */
+.report-form input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    opacity: 0.75;
+
+    cursor: pointer;
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+}
+
+.report-form input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+
+    transform: scale(1.1);
+}
+/* ========================================
+   CUSTOM DATE PICKER ICON
+   ======================================== */
+
+.report-form input[type="date"] {
+    position: relative;
+
+    padding-right: 48px;
+
+    color-scheme: dark;
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2365d4ff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='17' rx='2'/%3E%3Cline x1='16' y1='2' x2='16' y2='6'/%3E%3Cline x1='8' y1='2' x2='8' y2='6'/%3E%3Cline x1='3' y1='10' x2='21' y2='10'/%3E%3C/svg%3E");
+
+    background-repeat: no-repeat;
+
+    background-position:
+        right 15px center;
+
+    background-size: 18px 18px;
+}
+
+
+/* Keep the real browser picker clickable,
+   but visually hide its ugly native icon */
+
+.report-form input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+
+    position: absolute;
+
+    right: 0;
+
+    width: 45px;
+    height: 100%;
+
+    cursor: pointer;
+}
+
+
+/* Slight glow when hovering over the calendar area */
+
+.report-form input[type="date"]:hover {
+    border-color: rgba(56, 189, 248, 0.35);
+
+    background-color: rgba(5, 18, 16, 0.75);
+}
+
+
+/* Focus */
+
+.report-form input[type="date"]:focus {
+    border-color: rgba(56, 189, 248, 0.6);
+
+    box-shadow:
+        0 0 0 3px rgba(56, 189, 248, 0.06),
+        0 0 20px rgba(32, 201, 151, 0.05);
 }

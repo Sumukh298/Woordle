@@ -1,110 +1,213 @@
+{% load static %}
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Guess The Word</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    {% load static %}
+    <title>Guess The Word</title>
 
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 
-<body>
+<body class="game-page">
 
-    <h1>Guess The Word</h1>
+    <header class="game-header">
 
-    <p>Welcome, {{ request.user.username }}!</p>
+        <div class="game-brand">
+            <div class="game-logo">GW</div>
 
-
-    {% if limit_reached %}
-
-        <h2>You have reached your limit of 3 games for today.</h2>
-
-
-    {% else %}
-
-        <p>Your game has started.</p>
+            <div>
+                <h1>Guess The Word</h1>
+                <p>Welcome, {{ request.user.username }}</p>
+            </div>
+        </div>
 
 
-        {% if not game.completed %}
+        <div class="game-actions">
 
-            {% if error %}
-                <p>{{ error }}</p>
+            {% if request.user.is_staff %}
+                <a href="{% url 'reports' %}" class="admin-button">
+                    Reports
+                </a>
             {% endif %}
 
-            <form method="POST">
+            <a href="/logout/" class="logout-button">
+                Logout
+            </a>
 
-                {% csrf_token %}
+        </div>
 
-                <input
-                type="text"
-                name="guess"
-                maxlength="5"
-                pattern="[A-Za-z]{5}"
-                title="Enter exactly 5 letters."
-                required>
+    </header>
 
-                <button type="submit">Guess</button>
+    <main class="game-container">
 
-            </form>
+
+        {% if limit_reached %}
+
+            <section class="game-message-card">
+
+                <div class="message-icon">✓</div>
+
+                <h2>Daily limit reached</h2>
+
+                <p>
+                    You've completed your three games for today.
+                    Come back tomorrow for another round.
+                </p>
+
+            </section>
 
 
         {% else %}
 
-            {% if game.won %}
+            <section class="game-intro">
 
-                <h2>🎉 Congratulations! You guessed the word!</h2>
+                <span class="eyebrow">WORD CHALLENGE</span>
 
-            {% else %}
-
-                <h2>Better luck next time!</h2>
+                <h2>Find the hidden word.</h2>
 
                 <p>
-                    The word was: {{ game.word.word }}
+                    Enter a five-letter word and use the clues to
+                    uncover today's answer.
                 </p>
 
-            {% endif %}
-            <form action="{% url 'game_over' %}" method="POST">
+            </section>
 
-            {% csrf_token %}
+            <section class="guess-board">
 
-        <button type="submit">OK</button>
+                {% for guess in guesses %}
 
-        </form>
-            <form action="{% url 'next_game' %}" method="POST">
+                    <div class="guess-row">
 
-                {% csrf_token %}
+                        {% for tile in guess.tiles %}
 
-                <button type="submit">Next Game</button>
+                            <div class="guess-tile {{ tile.color }}">
+                                {{ tile.letter }}
+                            </div>
 
-            </form>
+                        {% endfor %}
 
-        {% endif %}
-        {% for guess in guesses %}
-
-            <div>
-
-                {% for tile in guess.tiles %}
-
-                    <span class="{{ tile.color }}">
-                        {{ tile.letter }}
-                    </span>
+                    </div>
 
                 {% endfor %}
 
-            </div>
+            </section>
 
-        {% endfor %}
-    {% endif %}
+            {% if not game.completed %}
 
-    <p>
-        <a href="/logout/">Logout</a>
-    </p>
-    {% if request.user.is_staff %}
-    <p>
-        <a href="{% url 'reports' %}">Admin Reports</a>
-    </p>
-{% endif %}
+                {% if error %}
+
+                    <div class="game-error">
+                        {{ error }}
+                    </div>
+
+                {% endif %}
+
+
+                <form method="POST" class="guess-form">
+                    {% csrf_token %}
+                  <input
+                    type="text"
+                    name="guess"
+                    maxlength="5"
+                    pattern="[A-Za-z]{5}"
+                    title="Enter exactly 5 letters."
+                    placeholder="TYPE YOUR GUESS"
+                    autocomplete="off"
+                    autofocus
+                    required>
+                    <button type="submit" class="guess-button">
+                        Guess
+                        <span>→</span>
+                    </button>
+                </form>
+            {% else %}
+                <section class="result-card">
+
+                    {% if game.won %}
+
+                        <div class="result-icon success">
+                            ✓
+                        </div>
+
+                        <span class="result-label">SOLVED</span>
+
+                        <h2>Excellent work.</h2>
+
+                        <p>
+                            You found the hidden word.
+                        </p>
+
+                    {% else %}
+
+                        <div class="result-icon failure">
+                            ×
+                        </div>
+
+                        <span class="result-label">GAME OVER</span>
+
+                        <h2>Better luck next time.</h2>
+
+                        <p>
+                            The word was
+                            <strong>{{ game.word.word }}</strong>
+                        </p>
+
+                    {% endif %}
+
+
+                    <div class="result-actions">
+
+                        <form action="{% url 'game_over' %}" method="POST">
+
+                            {% csrf_token %}
+
+                            <button
+                                type="submit"
+                                class="secondary-button"
+                            >
+                                Finish
+                            </button>
+
+                        </form>
+
+
+                        <form action="{% url 'next_game' %}" method="POST">
+
+                            {% csrf_token %}
+
+                            <button
+                                type="submit"
+                                class="primary-button"
+                            >
+                                Next Game
+                                <span>→</span>
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </section>
+
+            {% endif %}
+
+
+        {% endif %}
+
+    </main>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const guessInput = document.querySelector('input[name="guess"]');
+
+        if (guessInput) {
+            guessInput.focus();
+        }
+    });
+</script>
 
 </body>
 
